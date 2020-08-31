@@ -78,7 +78,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/08/31/test/">模块化-CommonJS2</a>
+      <a class="article-title" href="/2020/08/31/test/">模块化-CommonJS</a>
     </h1>
   
 
@@ -111,7 +111,8 @@
 </blockquote>
 <p>举例说明上面一段话：</p>
 <p>第一种情况:  util.js 是入口文件</p>
-<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    count ++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br></pre></td></tr></table></figure></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    count ++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e4c620ea8037473ea566e4a63284ffd3~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>第二种情况  util.js 是入一个模块，被其他文件使用</p>
 <ol>
@@ -132,7 +133,8 @@
 </ul>
 <p>任何一个正常的模块化标准（比如c语言，csharp），都应该默认隐藏模块中的所有实现，而通过一些语法或api调用来暴露接口。</p>
 <p>举例说明上面一段话：</p>
-<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>; <span class="comment">// 需要隐藏的内部实现</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 要暴露给外部的接口（接口：比如数据、对象等希望给外部使用的东西）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    count ++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br></pre></td></tr></table></figure></code></pre>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>; <span class="comment">// 需要隐藏的内部实现</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 要暴露给外部的接口（接口：比如数据、对象等希望给外部使用的东西）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNumber</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    count ++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(getNumber());</span><br></pre></td></tr></table></figure>
+
 <p>分析：<br>默认情况下，以上代码全部隐藏，其他模块无法使用该模块，该模块内部的变量、函数都不会造成全局的污染，都是内部的实现；</p>
 <p>若要暴露给外部使用需要通过特殊的语法或一些api（api：比如调用某个函数，或者给某个对象赋值）</p>
 <p>比如说，以上代码没有使用任何方式，所以，变量count和方法getNumber都是隐藏的。</p>
@@ -314,7 +316,7 @@
       <ul>
         
           <li>
-            <a href="/2020/08/31/test/">模块化-CommonJS2</a>
+            <a href="/2020/08/31/test/">模块化-CommonJS</a>
           </li>
         
           <li>
