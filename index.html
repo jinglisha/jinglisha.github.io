@@ -171,37 +171,37 @@
 </ol>
 <p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc152966e0b742ffa802bf8ed910f0d5~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <p>  分析：nodejs做了啥？<br>  首先，require函数读取到内部路径，然后运行该js，并且把里面导出的内容形成一个对象，作为requre函数的导出结果</p>
-<p>  细节：nodejs中导入模块，使用相对路径，并且必须以 ./ 或 ../开头</p>
-<ol start="2">
-<li><p>如何隐藏？</p>
-<p> 为了隐藏模块中的代码，nodejs执行模块时，会将模块中的所有代码放置到一个函数中执行，以保证不污染全局变量。</p>
-<p> 可以理解为匿名函数，其实不是匿名函数：</p>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 模块中的代码</span></span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
-</li>
+<p>  细节：nodejs中导入模块，使用相对路径，并且必须以 ./ 或 ../开头<br>2. 如何隐藏？<br>为了隐藏模块中的代码，nodejs执行模块时，会将模块中的所有代码放置到一个函数中执行，以保证不污染全局变量。<br>可以理解为匿名函数，其实不是匿名函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 模块中的代码</span></span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
 <li><p>如何导出？<br> 为了保证顺利的导出模块内容，nodejs做了以下处理：</p>
 <ol>
-<li>在模块开始执行之前，初始化一个值 module.exports = {}</li>
-<li>module.exports即模块的导出值</li>
-<li>为了方便开发者便捷的导出，nodejs在初始化完module.exports后，又声明了一个变量exports = module.exports</li>
-</ol>
+<li><p>在模块开始执行之前，初始化一个值 module.exports = {}</p>
+</li>
+<li><p>module.exports即模块的导出值</p>
+</li>
+<li><p>为了方便开发者便捷的导出，nodejs在初始化完module.exports后，又声明了一个变量exports = module.exports<br>举个伪代码例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">module</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 1.</span></span><br><span class="line">    <span class="built_in">module</span>.exports = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">exports</span> = <span class="built_in">module</span>.exports;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">exports</span>.getNumber = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exports</span>.abc = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">module</span>.exports;</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+
+<p>模块导出的多种方式：</p>
 </li>
 </ol>
-<pre><code>  举个伪代码例子：
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">module</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 1.</span></span><br><span class="line">    <span class="built_in">module</span>.exports = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.</span></span><br><span class="line">    <span class="keyword">var</span> <span class="built_in">exports</span> = <span class="built_in">module</span>.exports;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">exports</span>.getNumber = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">exports</span>.abc = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">module</span>.exports;</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>第一种：给exports加属性导出(注意：不是直接赋值)</p>
+</li>
+<li><p>第二种：直接给module.exports加属性导出</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">module</span>.exports.getNumber = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports.abc = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三种：直接给module.exports赋值</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports === <span class="built_in">exports</span>) <span class="comment">// true 都是空对象</span></span><br><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    getNumber: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;,</span><br><span class="line">    abc: <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports === <span class="built_in">exports</span>) <span class="comment">// false</span></span><br><span class="line"><span class="comment">// module.exports 有值</span></span><br><span class="line"><span class="comment">// exports 还是空对象</span></span><br></pre></td></tr></table></figure>
 
-模块导出的多种方式：
-- 第一种：给exports加属性导出(注意：不是直接赋值)
-- 第二种：直接给module.exports加属性导出
-
-    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">module</span>.exports.getNumber = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    count++;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports.abc = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
-
-- 第三种：直接给module.exports赋值
-
-    <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports === <span class="built_in">exports</span>) <span class="comment">// true 都是空对象</span></span><br><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    getNumber: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;,</span><br><span class="line">    abc: <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>.exports === <span class="built_in">exports</span>) <span class="comment">// false</span></span><br><span class="line"><span class="comment">// module.exports 有值</span></span><br><span class="line"><span class="comment">// exports 还是空对象</span></span><br></pre></td></tr></table></figure>
-
-    选择哪种导出方式看个人习惯，个人习惯第三种-直接给module.exports赋值。</code></pre>
-<ol start="4">
-<li>为了避免反复加载同一个模块，nodejs默认开启了模块缓存，如果加载的模块已经被加载过了，则会自动使用之前的导出结果。</li>
+<p>  选择哪种导出方式看个人习惯，个人习惯第三种-直接给module.exports赋值。</p>
+</li>
+</ul>
+</li>
+<li><p>为了避免反复加载同一个模块，nodejs默认开启了模块缓存，如果加载的模块已经被加载过了，则会自动使用之前的导出结果。</p>
+</li>
 </ol>
 
       
