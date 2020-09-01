@@ -14,14 +14,17 @@
 <meta property="og:site_name" content="景莉莎的博客">
 <meta property="og:description" content="理解一些基本概念 举例说明异步: 袁老师同时约了两位同学进行面试  同步: 袁老师面试A同学的时候,B同学等着,面试完A同学,再面试B同学  异步: 袁老师面试A同学的时候,先让A同学进行笔试,同时袁老师去面试B同学  归纳:  同步: 一个时间只能做一件事  异步: 一个时间可以同时做多件事  模型 可以理解为一套规则,碰到什么情况按照这套规则解决.   ES官方参考了大量的异步场景，总结出了一">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74878bf8d0a2458ba5e215c37160b43b~tplv-k3u1fbpfcp-zoom-1.image">
+<meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aaf0e3cdac864ca9b69d577f4f39336e~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3123b1dd2395446cabf43d4c12a1da60~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="og:image" content="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2448f24939854e2aaae060aaee55b1f0~tplv-k3u1fbpfcp-zoom-1.image">
 <meta property="article:published_time" content="2020-09-01T05:35:00.000Z">
-<meta property="article:modified_time" content="2020-09-01T05:35:23.899Z">
+<meta property="article:modified_time" content="2020-09-01T05:45:51.139Z">
 <meta property="article:author" content="小莎">
 <meta property="article:tag" content="异步处理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3123b1dd2395446cabf43d4c12a1da60~tplv-k3u1fbpfcp-zoom-1.image">
+<meta name="twitter:image" content="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image">
   
     <link rel="alternate" href="/atom.xml" title="景莉莎的博客" type="application/atom+xml">
   
@@ -131,13 +134,9 @@
 </ul>
 </li>
 </ol>
-<pre><code> **事情总是从 未决阶段 逐步发展到 已决阶段 的。并且，未决阶段拥有控制何时通向已决阶段的能力。**
-
- ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image)
-
- 举例说明：
- ajax请求里，这句话通向已决。
-![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74878bf8d0a2458ba5e215c37160b43b~tplv-k3u1fbpfcp-zoom-1.image)</code></pre>
+<p><em>事情总是从 未决阶段 逐步发展到 已决阶段 的。并且，未决阶段拥有控制何时通向已决阶段的能力。</em></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>举例说明：<br>ajax请求里，这句话通向已决。<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74878bf8d0a2458ba5e215c37160b43b~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <ol start="2">
 <li><p>ES6将这两个阶段化分为三种状态：pending（挂起）、resolved（已解决）、rejected（已拒绝）</p>
 <ul>
@@ -160,6 +159,7 @@
 <li><p>比如：发送ajax请求</p>
 <p> unsettled：向服务器发送ajax请求</p>
 <p> rejected：服务器网络不好连不上</p>
+<p> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aaf0e3cdac864ca9b69d577f4f39336e~tplv-k3u1fbpfcp-zoom-1.image"></p>
 </li>
 </ol>
 </li>
@@ -168,11 +168,7 @@
 </ul>
 </li>
 </ol>
-<pre><code>        ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aaf0e3cdac864ca9b69d577f4f39336e~tplv-k3u1fbpfcp-zoom-1.image)
-
-
-
-我们将 把事情变为resolved状态 的过程叫做 **resolve**，推向该状态时，可能会传递一些数据
+<pre><code>我们将 把事情变为resolved状态 的过程叫做 **resolve**，推向该状态时，可能会传递一些数据
 
 我们将 把事情变为rejected状态 的过程叫做 **reject**，推向该状态时，可能会传递一些数据，通常为错误信息
 

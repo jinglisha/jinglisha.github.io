@@ -125,13 +125,9 @@
 </ul>
 </li>
 </ol>
-<pre><code> **事情总是从 未决阶段 逐步发展到 已决阶段 的。并且，未决阶段拥有控制何时通向已决阶段的能力。**
-
- ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image)
-
- 举例说明：
- ajax请求里，这句话通向已决。
-![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74878bf8d0a2458ba5e215c37160b43b~tplv-k3u1fbpfcp-zoom-1.image)</code></pre>
+<p><em>事情总是从 未决阶段 逐步发展到 已决阶段 的。并且，未决阶段拥有控制何时通向已决阶段的能力。</em></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p>举例说明：<br>ajax请求里，这句话通向已决。<br><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74878bf8d0a2458ba5e215c37160b43b~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <ol start="2">
 <li><p>ES6将这两个阶段化分为三种状态：pending（挂起）、resolved（已解决）、rejected（已拒绝）</p>
 <ul>
@@ -154,6 +150,7 @@
 <li><p>比如：发送ajax请求</p>
 <p> unsettled：向服务器发送ajax请求</p>
 <p> rejected：服务器网络不好连不上</p>
+<p> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aaf0e3cdac864ca9b69d577f4f39336e~tplv-k3u1fbpfcp-zoom-1.image"></p>
 </li>
 </ol>
 </li>
@@ -162,11 +159,7 @@
 </ul>
 </li>
 </ol>
-<pre><code>        ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aaf0e3cdac864ca9b69d577f4f39336e~tplv-k3u1fbpfcp-zoom-1.image)
-
-
-
-我们将 把事情变为resolved状态 的过程叫做 **resolve**，推向该状态时，可能会传递一些数据
+<pre><code>我们将 把事情变为resolved状态 的过程叫做 **resolve**，推向该状态时，可能会传递一些数据
 
 我们将 把事情变为rejected状态 的过程叫做 **reject**，推向该状态时，可能会传递一些数据，通常为错误信息
 
