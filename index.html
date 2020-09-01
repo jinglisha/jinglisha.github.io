@@ -159,15 +159,11 @@
 </ul>
 </li>
 </ol>
-<pre><code>我们将 把事情变为resolved状态 的过程叫做 **resolve**，推向该状态时，可能会传递一些数据
-
-我们将 把事情变为rejected状态 的过程叫做 **reject**，推向该状态时，可能会传递一些数据，通常为错误信息
-
-![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1dcd933bd4c8486f846a384f60972801~tplv-k3u1fbpfcp-zoom-1.image)
-
-**始终记住，无论是unsettled和settled阶段，还是pending（挂起）、resolved（已解决）、rejected（已拒绝）状态，都是不可逆的！**
-
-![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10c91a02473f4adb836874168c20ea87~tplv-k3u1fbpfcp-zoom-1.image)</code></pre>
+<p>我们将 把事情变为resolved状态 的过程叫做 <strong>resolve</strong>，推向该状态时，可能会传递一些数据</p>
+<p>我们将 把事情变为rejected状态 的过程叫做 <strong>reject</strong>，推向该状态时，可能会传递一些数据，通常为错误信息</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1dcd933bd4c8486f846a384f60972801~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<p><strong>始终记住，无论是unsettled和settled阶段，还是pending（挂起）、resolved（已解决）、rejected（已拒绝）状态，都是不可逆的！</strong></p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10c91a02473f4adb836874168c20ea87~tplv-k3u1fbpfcp-zoom-1.image"></p>
 <ol start="3">
 <li><p>当事情达到已决阶段后，通常需要进行后续处理，不同的已决阶段，决定了不同的后续处理。</p>
 <p> 比如：ajax请求，后续处理就是调用的success回调。</p>
