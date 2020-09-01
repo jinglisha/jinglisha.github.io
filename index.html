@@ -64,6 +64,149 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-异步处理-异步处理的通用模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/01/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%9A%84%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B/" class="article-date">
+  <time datetime="2020-09-01T05:35:00.000Z" itemprop="datePublished">2020-09-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/01/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%9A%84%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B/">异步处理-异步处理的通用模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="理解一些基本概念"><a href="#理解一些基本概念" class="headerlink" title="理解一些基本概念"></a>理解一些基本概念</h3><ol>
+<li><p>举例说明异步: 袁老师同时约了两位同学进行面试</p>
+<p> 同步: 袁老师面试A同学的时候,B同学等着,面试完A同学,再面试B同学</p>
+<p> 异步: 袁老师面试A同学的时候,先让A同学进行笔试,同时袁老师去面试B同学</p>
+<p> 归纳:</p>
+<p> 同步: 一个时间只能做一件事</p>
+<p> 异步: 一个时间可以同时做多件事</p>
+</li>
+<li><p>模型<br> 可以理解为一套规则,碰到什么情况按照这套规则解决.</p>
+</li>
+</ol>
+<p>ES官方参考了大量的异步场景，总结出了一套异步的通用模型，该模型可以覆盖几乎所有的异步场景，甚至是同步场景。</p>
+<p>值得注意的是，为了兼容旧系统，ES6并不打算抛弃掉过去的做法，只是基于该模型推出一个全新的 API ，使用该API，会让异步处理更加的简洁优雅。</p>
+<p>理解该API，最重要的，是理解它的异步模型。</p>
+<ol>
+<li><p>ES6将某一件可能发生异步操作的事情，分为两个阶段：unsettled和settled</p>
+<ul>
+<li><p>unsettled：未决阶段，表示事情还在进行前期的处理，并没有发生通向结果的那件事。</p>
+</li>
+<li><p>settled：已决阶段，事情已经有了这个结果，不管这个结果是好是坏，整件事情无法逆转。</p>
+<p>   举例说明：</p>
+<ol>
+<li><p>比如：垦哥向女神发送表白短信。</p>
+<p>unsettled： 发送短信</p>
+<p>settled：女神给了回应</p>
+</li>
+<li><p>比如：发送ajax请求</p>
+<p>unsettled：还未从服务器收到结果</p>
+<p>settled：服务器已返回结果</p>
+</li>
+<li><p>比如：click点击事件</p>
+<p>unsettled：浏览器监听窗口中的某个元素，是否被点击</p>
+<p>settled：按钮已经被点击了</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code> **事情总是从 未决阶段 逐步发展到 已决阶段 的。并且，未决阶段拥有控制何时通向已决阶段的能力。**
+
+ ![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf43472287a94ba791a4689ba94bfe5d~tplv-k3u1fbpfcp-zoom-1.image)
+
+ 举例说明：
+ ajax请求里，这句话通向已决。
+![](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/74878bf8d0a2458ba5e215c37160b43b~tplv-k3u1fbpfcp-zoom-1.image)</code></pre>
+<ol start="2">
+<li><p>ES6将这两个阶段化分为三种状态：pending（挂起）、resolved（已解决）、rejected（已拒绝）</p>
+<ul>
+<li><p>pending：挂起，处于未决阶段，则表示这件事情还在挂起（最终的结果还没出来）</p>
+</li>
+<li><p>resolved：已处理，已决阶段的一种状态，表示整件事情已经出现结果，并是一个可以按照正常逻辑进行下去的结果。</p>
+<ol>
+<li><p>比如：垦哥向女神发送表白短信。</p>
+<p> unsettled：发送短信</p>
+<p> resolved：女神给了回应（不管答应还是拒绝）</p>
+</li>
+</ol>
+<ul>
+<li><p>rejected：已拒绝，已决阶段的一种状态，表示整件事情已经出现结果，并是一个无法按照正常逻辑进行下去的结果，通常用于表示有一个错误。</p>
+<ol>
+<li><p>比如：垦哥向女神发送表白短信。</p>
+<p> unsettled：发送短信</p>
+<p> rejected：因为网络原因没有发送成功或者发给了他的好兄弟董哥</p>
+</li>
+<li><p>比如：发送ajax请求</p>
+<p> unsettled：向服务器发送ajax请求</p>
+<p> rejected：服务器网络不好连不上</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>        ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/aaf0e3cdac864ca9b69d577f4f39336e~tplv-k3u1fbpfcp-zoom-1.image)
+
+
+
+我们将 把事情变为resolved状态 的过程叫做 **resolve**，推向该状态时，可能会传递一些数据
+
+我们将 把事情变为rejected状态 的过程叫做 **reject**，推向该状态时，可能会传递一些数据，通常为错误信息
+
+![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1dcd933bd4c8486f846a384f60972801~tplv-k3u1fbpfcp-zoom-1.image)
+
+**始终记住，无论是unsettled和settled阶段，还是pending（挂起）、resolved（已解决）、rejected（已拒绝）状态，都是不可逆的！**
+
+![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/10c91a02473f4adb836874168c20ea87~tplv-k3u1fbpfcp-zoom-1.image)</code></pre>
+<ol start="3">
+<li><p>当事情达到已决阶段后，通常需要进行后续处理，不同的已决阶段，决定了不同的后续处理。</p>
+<p> 比如：ajax请求，后续处理就是调用的success回调。</p>
+<ul>
+<li><p>resolved状态：这是一个正常的已决状态，后续处理表示为thenable</p>
+</li>
+<li><p>rejected状态：这是一个非正常的已决状态，后续处理表示为catchable</p>
+<p>后续处理可能有多个，因此会形成作业队列，这些后续处理会按照顺序，当状态到达后依次执行。</p>
+</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3123b1dd2395446cabf43d4c12a1da60~tplv-k3u1fbpfcp-zoom-1.image"></p>
+</li>
+<li><p>整件事称之为Promise<br> <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2448f24939854e2aaae060aaee55b1f0~tplv-k3u1fbpfcp-zoom-1.image"></p>
+</li>
+</ol>
+<p> <strong>理解上面的概念，对学习Promise至关重要！</strong>   </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/01/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%9A%84%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B/" data-id="ckejiuuq20000175ccfuicue0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" rel="tag">异步处理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-模块化-CommonJS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/08/31/%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS/" class="article-date">
@@ -284,7 +427,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" rel="tag">异步处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a></li></ul>
     </div>
   </div>
 
@@ -294,7 +437,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 10px;">模块化</a>
+      <a href="/tags/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86/" style="font-size: 10px;">异步处理</a> <a href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" style="font-size: 10px;">模块化</a>
     </div>
   </div>
 
@@ -303,7 +446,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a></li></ul>
     </div>
   </div>
 
@@ -314,6 +457,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/09/01/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%9A%84%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B/">异步处理-异步处理的通用模型</a>
+          </li>
         
           <li>
             <a href="/2020/08/31/%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS/">模块化-CommonJS</a>
