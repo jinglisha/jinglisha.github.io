@@ -144,6 +144,96 @@
     
     
     <article
+  id="post-ES6模块化"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/09/10/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/"
+    >ES6模块化</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/09/10/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time datetime="2020-09-10T04:49:37.000Z" itemprop="datePublished">2020-09-10</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li><p>使用依赖<strong>预声明</strong>的方式导入模块</p>
+<ul>
+<li>依赖预声明<br>  优点：一开始就确定依赖关系<br>  缺点：某些时候效率较低</li>
+<li>依赖延迟声明：执行到require才加载模块<br>  优点：某些时候可以提高效率<br>  缺点：无法在一开始确定依赖关系（比较模糊）</li>
+</ul>
+</li>
+<li><p>灵活的多种导入导出方式 </p>
+</li>
+<li><p>规范的路径表示法：所有路径必须以./或../开头</p>
+</li>
+</ol>
+<h3 id="模块的引入"><a href="#模块的引入" class="headerlink" title="模块的引入"></a>模块的引入</h3><p><strong>注意：这一部分非模块化标准</strong></p>
+<p>目前，浏览器使用以下方式引入一个ES6模块文件</p>
+<p><code>&lt;script src=&quot;入口文件&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</code></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>ES6中的模块导入导出分为两种：</p>
+<ol>
+<li>基本导入导出</li>
+<li>默认导入导出</li>
+</ol>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f154c79ccc6f4d16b0677218d514c8ed~tplv-k3u1fbpfcp-zoom-1.image"></p>
+<h3 id="基本导入导出"><a href="#基本导入导出" class="headerlink" title="基本导入导出"></a>基本导入导出</h3><h4 id="基本导出"><a href="#基本导出" class="headerlink" title="基本导出"></a>基本导出</h4><p>基本导出必须有多个，每个必须有名称</p>
+<p>基本导出的语法如下：<br><code>export 声明表达式</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> a = <span class="number">1</span>; <span class="comment">// 导出a，值为1，类似于CommonJS中的exports.a = 1;</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123; <span class="comment">// 导出test，值为一个函数</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123; <span class="comment">// 导出Person，值为一个类</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或<br><code>export &#123; 具名符号 &#125;</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123; age, sex &#125; <span class="comment">// 将age变量的名称作为导出的名称，age变量的值作为导出的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 等效于</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> sex = <span class="string">&#x27;女&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="基本导入"><a href="#基本导入" class="headerlink" title="基本导入"></a>基本导入</h4><p>由于使用的是<strong>依赖预加载</strong>，因此，导入任何其他模块，导入代码必须放置到所有代码之前</p>
+<p><code>import &#123;导入的符号列表&#125; from &#39;模块路径&#39;</code></p>
+<p>注意以下细节：</p>
+<ul>
+<li>导入时，可以通过关键字as对导入的符号进行重命名<br>  <code>import &#123;name as name2&#125; from &#39;./a.js&#39;</code></li>
+<li>导入时使用的符号是常量，不可修改</li>
+<li>可以使用 * 号导入所有的基本导出，形成一个对象<br>  <code>import * as obj from &#39;./a.js&#39;</code></li>
+<li>只运行模块，不使用它内部的任何导出<br>  <code>import &#39;./a.js&#39;</code></li>
+</ul>
+<h3 id="默认导入导出"><a href="#默认导入导出" class="headerlink" title="默认导入导出"></a>默认导入导出</h3><h4 id="默认导出"><a href="#默认导出" class="headerlink" title="默认导出"></a>默认导出</h4><p><code>export default 默认导出的数据</code></p>
+<p>由于每个模块仅允许有一个默认导出，因此，每个模块不能出现多个默认导出语句</p>
+<h4 id="默认导入"><a href="#默认导入" class="headerlink" title="默认导入"></a>默认导入</h4><p><code>import 接收变量名 from &#39;模块路径&#39;</code> </p>
+<p>如果希望同时导入某个模块的默认导出和基本导出，可以使用下面的语法：<br><code>import data, &#123; a , b &#125; from &#39;./a.js&#39;</code></p>
+<p>将默认导出放到data里，基本导出分别放到变量a和b中 </p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/" rel="tag">模块化</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-异步处理-异步处理的通用模型"
   class="article article-type-post"
   itemscope
