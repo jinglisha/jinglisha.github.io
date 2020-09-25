@@ -144,6 +144,77 @@
     
     
     <article
+  id="post-包的使用"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/09/25/%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/"
+    >包的使用</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/09/25/%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2020-09-25T10:06:09.000Z" itemprop="datePublished">2020-09-25</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>nodejs 对 npm 支持非常良好</p>
+<p>当使用 nodejs 导入模块时，如果模块路径不是以 ./ 或 ../ 开头，则 node 会认为导入的模块来自于 node_modules 目录，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _ = <span class="built_in">require</span>(<span class="string">&quot;lodash&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>它首先会从当前目录的以下位置寻找文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node_modules/lodash.js</span><br><span class="line">node_modules/lodash/入口文件</span><br></pre></td></tr></table></figure>
+
+<p>若当前目录没有这样的文件，则会回溯到上级目录按照同样的方式查找</p>
+<p>如果到顶级目录都无法找到文件，则抛出错误</p>
+<p>上面提到的入口文件按照以下规则确定</p>
+<ol>
+<li>查看导入包的package.json文件，读取main字段作为入口文件</li>
+<li>若不包含main字段，则使用index.js作为入口文件</li>
+</ol>
+<blockquote>
+<p>入口文件的规则同样适用于自己工程中的模块<br>在 node 中，还可以手动指定路径来导入相应的文件，这种情况比较少见</p>
+</blockquote>
+<hr>
+<p>如何理解<code>var a = require(&quot;./a&quot;);</code></p>
+<ol>
+<li>首先，查看当前目录是否有 a.js</li>
+<li>把a当作文件夹，并且，把该文件夹当作一个包，看该包中是否有package.json文件，读取main字段。。。。</li>
+</ol>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/" rel="tag">npm</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-包的配置"
   class="article article-type-post"
   itemscope
