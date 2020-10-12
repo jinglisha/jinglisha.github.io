@@ -144,6 +144,65 @@
     
     
     <article
+  id="post-Vue的响应式2-如何更改数据后重新渲染页面？"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/"
+    >Vue的响应式2-如何更改数据后重新渲染页面？</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/" class="article-date">
+  <time datetime="2020-10-12T11:07:05.000Z" itemprop="datePublished">2020-10-12</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="不渲染页面的情况"><a href="#不渲染页面的情况" class="headerlink" title="不渲染页面的情况"></a>不渲染页面的情况</h3><h4 id="1-数组-通过索引的方式更改数组"><a href="#1-数组-通过索引的方式更改数组" class="headerlink" title="1. 数组-通过索引的方式更改数组"></a>1. 数组-通过索引的方式更改数组</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; arr &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        arr: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4b6e1c6752043c2809cb520b4e5b769~tplv-k3u1fbpfcp-watermark.webp"></p>
+<h4 id="2-数组-更改长度"><a href="#2-数组-更改长度" class="headerlink" title="2. 数组-更改长度"></a>2. 数组-更改长度</h4><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5201c9a198ba42ab953b06b6d6ae0823~tplv-k3u1fbpfcp-watermark.webp"></p>
+<h4 id="3-对象-增属性"><a href="#3-对象-增属性" class="headerlink" title="3. 对象-增属性"></a>3. 对象-增属性</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; mrKen.wife &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        msg: <span class="string">&#x27;垦哥的基本信息&#x27;</span>,</span><br><span class="line">        mrKen: &#123;</span><br><span class="line">            name: <span class="string">&#x27;垦哥&#x27;</span>,</span><br><span class="line">            age: <span class="number">30</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60ee8958f199449d9bb546b471eaee43~tplv-k3u1fbpfcp-watermark.webp"></p>
+<h4 id="4-对象-删属性"><a href="#4-对象-删属性" class="headerlink" title="4. 对象-删属性"></a>4. 对象-删属性</h4><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9aa5bc03c8f74545848c51b51f421e30~tplv-k3u1fbpfcp-watermark.webp"></p>
+<h3 id="渲染页面的情况"><a href="#渲染页面的情况" class="headerlink" title="渲染页面的情况"></a>渲染页面的情况</h3><h4 id="1-数组-变异方法"><a href="#1-数组-变异方法" class="headerlink" title="1. 数组-变异方法"></a>1. 数组-变异方法</h4><p>push、pop、shift、unshift、splice、sort、reverse</p>
+<h4 id="2-vm-set-Vue-set-改哪个、要改的值、改成什么"><a href="#2-vm-set-Vue-set-改哪个、要改的值、改成什么" class="headerlink" title="2. vm.$set/Vue.set(改哪个、要改的值、改成什么)"></a>2. vm.$set/Vue.set(改哪个、要改的值、改成什么)</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把arr = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]的第三项改成&#x27;d&#x27;</span></span><br><span class="line">vm.$set(vm.arr, <span class="number">2</span>, <span class="string">&#x27;d&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把mrKen = &#123;name: &#x27;垦哥&#x27;,age: 30&#125;的&#x27;age&#x27;属性值改成18</span></span><br><span class="line">vm.$set(vm.mrKen, <span class="string">&#x27;age&#x27;</span>, <span class="number">18</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-vm-delete-Vue-delete-删哪个、要删的值"><a href="#3-vm-delete-Vue-delete-删哪个、要删的值" class="headerlink" title="3. vm.$delete/Vue.delete(删哪个、要删的值)"></a>3. vm.$delete/Vue.delete(删哪个、要删的值)</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除arr = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]的第三项</span></span><br><span class="line">vm.$set(vm.arr, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除mrKen = &#123;name: &#x27;垦哥&#x27;,age: 30&#125;的&#x27;age&#x27;属性</span></span><br><span class="line">vm.$set(vm.mrKen, <span class="string">&#x27;age&#x27;</span>);</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+   
+</article>
+
+    
+    <article
   id="post-Vue的响应式1"
   class="article article-type-post"
   itemscope
