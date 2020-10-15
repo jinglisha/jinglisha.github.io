@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Archives |  
+     
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -42,247 +42,178 @@
     
       
     <main class="content on">
-      <section class="outer">
+      
+<section class="cover">
+    
+      
+      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+        target="_blank"><img width="149" height="149" src="/images/forkme.png"
+          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover1.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">jinglisha的博客</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  
+  
+
+<div class="notice" style="margin-top:50px">
+    <i class="ri-heart-fill"></i>
+    <div class="notice-content" id="broad"></div>
+</div>
+<script type="text/javascript">
+    fetch('https://v1.hitokoto.cn')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("broad").innerHTML = data.hitokoto;
+        })
+        .catch(console.error)
+</script>
+
+<style>
+    .notice {
+        padding: 20px;
+        border: 1px dashed #e6e6e6;
+        color: #969696;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        background: #fbfbfb50;
+        border-radius: 10px;
+    }
+
+    .notice i {
+        float: left;
+        color: #999;
+        font-size: 16px;
+        padding-right: 10px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .notice-content {
+        display: initial;
+        vertical-align: middle;
+    }
+</style>
   
   <article class="articles">
     
     
-    <h1 class="page-type-title">Archives</h1>
     
     
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2020" class="archive-year">2020</a>
+    <article
+  id="post-hello-world"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/31/hello-world/"
+    >Hello World</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/31/hello-world/" class="article-date">
+  <time datetime="2020-08-31T08:32:47.338Z" itemprop="datePublished">2020-08-31</time>
+</a>    
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/10/15/Vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" class="archive-article-date">
-  <time datetime="2020-10-15T10:56:56.000Z" itemprop="datePublished">10/15</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/10/15/Vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/"
-    >Vue条件渲染</a> 
-</h2>
- 
+  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/" class="archive-article-date">
-  <time datetime="2020-10-12T11:07:05.000Z" itemprop="datePublished">10/12</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/"
-    >Vue的响应式2-如何更改数据后重新渲染页面？</a> 
-</h2>
- 
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/10/07/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F1/" class="archive-article-date">
-  <time datetime="2020-10-07T07:16:29.000Z" itemprop="datePublished">10/07</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/10/07/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F1/"
-    >Vue的响应式1</a> 
-</h2>
- 
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/09/25/%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/" class="archive-article-date">
-  <time datetime="2020-09-25T10:06:09.000Z" itemprop="datePublished">09/25</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/09/25/%E5%8C%85%E7%9A%84%E4%BD%BF%E7%94%A8/"
-    >包的使用</a> 
-</h2>
- 
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/09/24/%E5%8C%85%E7%9A%84%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  <time datetime="2020-09-24T11:01:52.000Z" itemprop="datePublished">09/24</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/09/24/%E5%8C%85%E7%9A%84%E9%85%8D%E7%BD%AE/"
-    >包的配置</a> 
-</h2>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
  
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/09/24/%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/" class="archive-article-date">
-  <time datetime="2020-09-24T10:31:44.000Z" itemprop="datePublished">09/24</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/09/24/%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/"
-    >包的安装</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/09/21/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/" class="archive-article-date">
-  <time datetime="2020-09-21T10:19:35.000Z" itemprop="datePublished">09/21</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/09/21/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/"
-    >包管理工具</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/09/10/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/" class="archive-article-date">
-  <time datetime="2020-09-10T04:49:37.000Z" itemprop="datePublished">09/10</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/09/10/ES6%E6%A8%A1%E5%9D%97%E5%8C%96/"
-    >ES6模块化</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/09/01/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%9A%84%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
-  <time datetime="2020-09-01T05:35:00.000Z" itemprop="datePublished">09/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/09/01/%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86%E7%9A%84%E9%80%9A%E7%94%A8%E6%A8%A1%E5%9E%8B/"
-    >异步处理-异步处理的通用模型</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/08/31/%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS/" class="archive-article-date">
-  <time datetime="2020-08-31T09:02:37.000Z" itemprop="datePublished">08/31</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2020/08/31/%E6%A8%A1%E5%9D%97%E5%8C%96-CommonJS/"
-    >模块化-CommonJS</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
+      <!-- reward -->
       
     </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
   </div>
-  
+
+    
+ 
+   
+</article>
+
+    
+  </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">下一页</a>
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
   
 </section>
+</div>
+
       <footer class="footer">
   <div class="outer">
     <ul>

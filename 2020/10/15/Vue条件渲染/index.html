@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Vue的响应式2-如何更改数据后重新渲染页面？ |  
+    Vue条件渲染 |  
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -44,7 +44,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Vue的响应式2-如何更改数据后重新渲染页面？"
+  id="post-Vue条件渲染"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -55,22 +55,22 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Vue的响应式2-如何更改数据后重新渲染页面？
+  Vue条件渲染
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/" class="article-date">
-  <time datetime="2020-10-12T11:07:05.000Z" itemprop="datePublished">2020-10-12</time>
+      <a href="/2020/10/15/Vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" class="article-date">
+  <time datetime="2020-10-15T10:56:56.000Z" itemprop="datePublished">2020-10-15</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">283</span>
+            <span class="post-count">511</span>
         </span>
     </span>
 
@@ -79,7 +79,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -94,18 +94,34 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="不渲染页面的情况"><a href="#不渲染页面的情况" class="headerlink" title="不渲染页面的情况"></a>不渲染页面的情况</h3><h4 id="1-数组-通过索引的方式更改数组"><a href="#1-数组-通过索引的方式更改数组" class="headerlink" title="1. 数组-通过索引的方式更改数组"></a>1. 数组-通过索引的方式更改数组</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; arr &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        arr: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d4b6e1c6752043c2809cb520b4e5b769~tplv-k3u1fbpfcp-watermark.webp"></p>
-<h4 id="2-数组-更改长度"><a href="#2-数组-更改长度" class="headerlink" title="2. 数组-更改长度"></a>2. 数组-更改长度</h4><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5201c9a198ba42ab953b06b6d6ae0823~tplv-k3u1fbpfcp-watermark.webp"></p>
-<h4 id="3-对象-增属性"><a href="#3-对象-增属性" class="headerlink" title="3. 对象-增属性"></a>3. 对象-增属性</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    &#123;&#123; mrKen.wife &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">        msg: <span class="string">&#x27;垦哥的基本信息&#x27;</span>,</span><br><span class="line">        mrKen: &#123;</span><br><span class="line">            name: <span class="string">&#x27;垦哥&#x27;</span>,</span><br><span class="line">            age: <span class="number">30</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60ee8958f199449d9bb546b471eaee43~tplv-k3u1fbpfcp-watermark.webp"></p>
-<h4 id="4-对象-删属性"><a href="#4-对象-删属性" class="headerlink" title="4. 对象-删属性"></a>4. 对象-删属性</h4><p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9aa5bc03c8f74545848c51b51f421e30~tplv-k3u1fbpfcp-watermark.webp"></p>
-<h3 id="渲染页面的情况"><a href="#渲染页面的情况" class="headerlink" title="渲染页面的情况"></a>渲染页面的情况</h3><h4 id="1-数组-变异方法"><a href="#1-数组-变异方法" class="headerlink" title="1. 数组-变异方法"></a>1. 数组-变异方法</h4><p>push、pop、shift、unshift、splice、sort、reverse</p>
-<h4 id="2-vm-set-Vue-set-改哪个、要改的值、改成什么"><a href="#2-vm-set-Vue-set-改哪个、要改的值、改成什么" class="headerlink" title="2. vm.$set/Vue.set(改哪个、要改的值、改成什么)"></a>2. vm.$set/Vue.set(改哪个、要改的值、改成什么)</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把arr = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]的第三项改成&#x27;d&#x27;</span></span><br><span class="line">vm.$set(vm.arr, <span class="number">2</span>, <span class="string">&#x27;d&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把mrKen = &#123;name: &#x27;垦哥&#x27;,age: 30&#125;的&#x27;age&#x27;属性值改成18</span></span><br><span class="line">vm.$set(vm.mrKen, <span class="string">&#x27;age&#x27;</span>, <span class="number">18</span>);</span><br></pre></td></tr></table></figure>
+  <h2 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h2><blockquote>
+<p>用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染。切换多个元素。</p>
+</blockquote>
+<p>因为 v-if 是一个指令，所以必须将它添加到一个元素上，但是如果想切换多个元素呢？此时可以把一个 <code>&lt;template&gt;</code> 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 <code>&lt;template&gt;</code> 元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">&quot;ok&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Paragraph 1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Paragraph 2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="3-vm-delete-Vue-delete-删哪个、要删的值"><a href="#3-vm-delete-Vue-delete-删哪个、要删的值" class="headerlink" title="3. vm.$delete/Vue.delete(删哪个、要删的值)"></a>3. vm.$delete/Vue.delete(删哪个、要删的值)</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除arr = [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]的第三项</span></span><br><span class="line">vm.$set(vm.arr, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除mrKen = &#123;name: &#x27;垦哥&#x27;,age: 30&#125;的&#x27;age&#x27;属性</span></span><br><span class="line">vm.$set(vm.mrKen, <span class="string">&#x27;age&#x27;</span>);</span><br></pre></td></tr></table></figure> 
+<h2 id="v-else"><a href="#v-else" class="headerlink" title="v-else"></a>v-else</h2><blockquote>
+<p>为 v-if 或者 v-else-if 添加“else 块”。</p>
+</blockquote>
+<p><strong>注意</strong>：前一兄弟元素必须有 v-if 或 v-else-if</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;Math.random() &gt; 0.5&quot;</span>&gt;</span></span><br><span class="line">杉杉</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">你看不见杉杉啦</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="v-else-if"><a href="#v-else-if" class="headerlink" title="v-else-if"></a>v-else-if</h2><blockquote>
+<p>表示 v-if 的 “else if 块”。可以链式调用。</p>
+</blockquote>
+<p><strong>注意</strong>：前一兄弟元素必须有 v-if 或 v-else-if</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;type === &#x27;A&#x27;&quot;</span>&gt;</span></span><br><span class="line">A</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">&quot;type === &#x27;B&#x27;&quot;</span>&gt;</span></span><br><span class="line">B</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">&quot;type === &#x27;C&#x27;&quot;</span>&gt;</span></span><br><span class="line">C</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">Not A/B/C</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h2><blockquote>
+<p>根据表达式之真假值，切换元素的 display CSS 属性。<br>  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-show</span>=<span class="string">&quot;ok&quot;</span>&gt;</span>Hello!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="v-if-VS-v-show"><a href="#v-if-VS-v-show" class="headerlink" title="v-if VS v-show"></a>v-if VS v-show</h2><ol>
+<li>v-if 是惰性的，如果在初始渲染时条件为假，则什么也不做，直到条件第一次变为真时，才会开始渲染条件块。v-show则不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。</li>
+<li>v-if 有更高的切换开销，v-show 有更高的初始渲染开销，如果需要非常频繁地切换，则使用 v-show 较好，如果在运行时条件很少改变，则使用 v-if 较好</li>
+<li>v-show不支持<code>&lt;template&gt;</code>元素</li>
+<li>v-show不支持v-else/v-else-if</li>
+</ol>
+ 
       <!-- reward -->
       
       <div id="reword-out">
@@ -173,7 +189,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/10/15/Vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -186,19 +202,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2020/10/15/Vue%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Vue条件渲染
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/10/07/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F1/" class="article-nav-link">
+      <a href="/2020/10/12/Vue%E7%9A%84%E5%93%8D%E5%BA%94%E5%BC%8F2-%E5%A6%82%E4%BD%95%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%90%8E%E9%87%8D%E6%96%B0%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2%EF%BC%9F/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Vue的响应式1</div>
+        <div class="article-nav-title">Vue的响应式2-如何更改数据后重新渲染页面？</div>
       </a>
     
   </nav>
